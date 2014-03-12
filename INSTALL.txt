@@ -1,0 +1,10 @@
+#reatedatabase horse;
+
+CREATE TABLE `horse_bbs` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `title` varchar(100) NOT NULL COMMENT '제목',
+  `body` longtext NOT NULL COMMENT '내용',
+  `viewCnt` int(11) DEFAULT NULL COMMENT '조회수',
+  `regDate` datetime NOT NULL COMMENT '등록일',
+  KEY `id` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8

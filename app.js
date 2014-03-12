@@ -60,10 +60,10 @@ app.get('/viewContents', function(request, response, next) {
 	});
 })
 
-//글쓰기
+//글쓰기뷰
 app.get('/write', function(request, response, next) {
 	fs.readFile('views/write.html', function(error, data) {
-		response.send(data.toString());
+		response.send(header + menu + data.toString() + footer);
 	});
 });
 
@@ -82,9 +82,43 @@ app.post('/upload', function(request, response, next) {
 	});
 });
 
+//글저장
+app.post('/write', function(request, response, next) {
+
+	var dat = {'state':0, 'msg': ''};
+	var mysql = require('mysql');
+	var client = mysql.createConnection({
+		user: 'root',
+		password: 'nhbaby',
+		database: 'horse'
+	});
+
+	client.query('insert into horse_bbs (title, body, viewCnt, regDate) values (?, ?, 0, now())'
+		, [request.param('title'), request.param('body')]
+		, function(error, results, fields) {
+			if(error) {
+				dat['state'] = -1;
+				dat['msg'] = 'query filed...';
+				console.log(dat['msg']);
+			} else {
+				dat['state'] = 1;
+				dat['data'] = results;
+				console.log(results);
+				console.log(fields);
+				client.end();
+			}
+			response.send(JSON.stringify(dat));
+	});
+
+
+
+	// request.method
+
+	// fs.readFile('views/write.html', function(error, data) {
+	// 	response.send(header + menu + data.toString() + footer);
+	// });
+});
+
 http.createServer(app).listen(app.get('port'), function(){
-
-
-
   console.log('Express server listening on port ' + app.get('port'));
 });
