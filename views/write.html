@@ -1,39 +1,47 @@
-	<link href="../css/froala_editor.min.css" rel="stylesheet" type="text/css">
-  <style>
-      #wrap {
-          /*text-align: left;*/
-          width: 80%;
-          margin: 140px auto;
-          text-align: left;
-      }
-  </style>
-  <script>
-    $(function() {
-      $('#btnWrite').click(function() {
-        var p = {};
-        p['title'] = $('#title').val();
-        p['body'] = $('#edit').editable("getHTML")[0];
-        console.log(p);
+    <link href="../css/froala_editor.min.css" rel="stylesheet" type="text/css">
+    <style>
+    #wrap {
+        /*text-align: left;*/
+        width: 80%;
+        margin: 50px auto;
+        text-align: left;
+    }
+    </style>
+    <script>
+        $(function() {
+            $('#btnWrite').click(function() {
+                var p = {};
+                p['title'] = $('#title').val();
+                p['body'] = $('#edit').editable("getHTML")[0];
+                console.log(p);
 
-        $.post('/write', p, function(data) {
-          console.log(data);
+                $.post('/write', p, function(res) {
+                    console.log(typeof res);
+                    if(typeof res === 'object') {
+                        if(res.state == '1') {
+                            alert('저장 성공');
+                            location.href = '/write';
+                        } else {
+                            alert(res.msg);
+                        }
+                    }
+                }, 'JSON');
+            });
         });
-      });
-    });
-  </script>
+    </script>
 
-  <div id="wrap" style="">
-    <label>제목</label>
-    <input type="text" size="50" id="title" />
-    <section id="editor">
-        <div id='edit' style="margin-top: 30px;"></div>
-    </section>
-    <input type="button" id="btnWrite" value="저장" />
-    <script src="../js/froala_editor.min.js"></script>
-  </div>
+    <div id="wrap" style="">
+        <label>제목</label>
+        <input type="text" size="50" id="title" />
+        <section id="editor">
+            <div id='edit' style="margin-top: 30px;"></div>
+        </section>
+        <input type="button" id="btnWrite" value="저장" />
+        <script src="../js/froala_editor.min.js"></script>
+    </div>
 
-  <script>
-      $(function(){
-          $('#edit').editable({inlineMode: false, imageUploadURL: '/upload', height: 500});
-      });
-  </script>
+    <script>
+        $(function(){
+            $('#edit').editable({inlineMode: false, imageUploadURL: '/upload', height: 500});
+        });
+    </script>
