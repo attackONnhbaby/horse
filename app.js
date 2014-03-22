@@ -67,86 +67,42 @@ app.get('/viewContents', function(request, response, next) {
     });
 });
 
+
+
 //리스트뷰
 app.get('/list', function(request, response) {
-    var dat = {'state':0, 'msg': ''};
-    var client = conn();
-    client.query('select * from horse_bbs'
-    , []
-    , function(error, results, fields) {
-        if(error) {
-            dat['state'] = -1;
-            dat['msg'] = 'query filed...';
-            console.log(dat['msg']);
-        } else {
-            dat['state'] = 1;
-            dat['data'] = results;
-//                        console.log(results);
-//                        console.log(fields);
-            client.end();
-        }
+    getList(0, function(data) {
+        listData = JSON.stringify(convertListData(data));
+        response.render('list', {
+            pageNum: 0,
+            listData: listData
+        });
+        delete data;
+    });
+});
 
-//    fs.readFile('views/header.html', function(error, data) {
-//        header = data.toString();
-//    });
-//    fs.readFile('views/menu.html', function(error, data) {
-//        menu = data.toString();
-//    });
-//    fs.readFile('views/footer.html', function(error, data) {
-//        footer = data.toString();
-//    });
-//console.log(results);
-//for(var i in results) {
-//    console.log(results[i].body);
-//}
-
-var a = JSON.stringify(results);
-//console.log(a);
-//console.log(typeof a);
-//console.log('################################');
-//var b = JSON.parse(a);
-//console.log(typeof b);
-//console.log(b);
-//console.log(typeof results);
-//return;
-//results = JSON.parse(results);
-
-//        fs.readFile('views/list.ejs', 'utf8', function(error, data) {
-//            response.writeHead(200, {'Content-Type' : 'text/html'});
-//            response.end(ejs.render(header + menu + data + footer, {
-//            response.end(ejs.render(data, {
-//                'data': a
-//            }));
-
-var users = [
-  { name: 'tobi', email: 'tobi@learnboost.com' },
-  { name: 'loki', email: 'loki@learnboost.com' },
-  { name: 'jane', email: 'jane@learnboost.com' }
-];
-
-                response.render('list', {
-                    aa: a,
-                    datas: results,
-                    users: users
-                });
-            
-//        });
-
-//        console.log('****************************************');
-//        for(var i in results) {
-//            console.log(results[i]);
-//            response.write(results[i].body);
-//        }
-//        console.log('****************************************');
-//        
-//        response.send(JSON.stringify(dat));
+//리스트 목록 추가 로드
+app.post('/list', function(request, response) {
+    getList(request.param('pageNum'), function(data) {
+        response.send(JSON.stringify(convertListData(data)));
     });
 });
 
 //글쓰기뷰
 app.get('/write', function(request, response, next) {
-    fs.readFile('views/write.html', function(error, data) {
-        response.send(header + menu + data.toString() + footer);
+    var client = conn();
+    client.query('SELECT categoryIDX, categoryName FROM horse_category ORDER BY categoryIDX'
+                , []
+                , function(error, results, fields) {
+                    if(error) {
+                        response.send('mysql error. #1');
+                        return;
+                    } else {
+                        response.render('write', {
+                            category: JSON.stringify(results)
+                        });
+                        client.end();
+                    }
     });
 });
 
@@ -158,8 +114,8 @@ app.post('/upload', function(request, response, next) {
             if(error) {
                 throw error;
             } else {
-                var a = {link: '/upload/' + request.files.file.name};
-                response.send(JSON.stringify(a));
+                var url = {link: 'http://127.0.0.1:3000/upload/' + request.files.file.name};
+                response.send(JSON.stringify(url));
             }
         });
     });
@@ -169,18 +125,15 @@ app.post('/upload', function(request, response, next) {
 app.post('/write', function(request, response, next) {
     var dat = {'state':0, 'msg': ''};
     var client = conn();
-    client.query('insert into horse_bbs (title, body, viewCnt, regDate) values (?, ?, 0, now())'
-                , [request.param('title'), request.param('body')]
+    client.query('insert into horse_bbs (categoryIDX, title, body, viewCnt, regDate) values (?, ?, ?, 0, now())'
+                , [request.param('categoryIDX'), request.param('title'), request.param('body')]
                 , function(error, results, fields) {
                     if(error) {
                         dat['state'] = -1;
                         dat['msg'] = 'query filed...';
-                        console.log(dat['msg']);
                     } else {
                         dat['state'] = 1;
                         dat['data'] = results;
-                        console.log(results);
-                        console.log(fields);
                         client.end();
                     }
                     response.send(JSON.stringify(dat));
@@ -192,6 +145,7 @@ http.createServer(app).listen(app.get('port'), function(){
 });
 
 /* function */
+//mysql 통신
 var conn = function() {
     var client = mysql.createConnection({
         user: 'nhbaby',
@@ -199,4 +153,58 @@ var conn = function() {
         database: 'horse'
     });
     return client;
+};
+
+//html태그 제거
+function strip_tags (input, allowed) {
+    allowed = (((allowed || "") + "").toLowerCase().match(/<[a-z][a-z0-9]*>/g) || []).join(''); // making sure the allowed arg is a string containing only tags in lowercase (<a><b><c>)
+    var tags = /<\/?([a-z][a-z0-9]*)\b[^>]*>/gi,
+        commentsAndPhpTags = /<!--[\s\S]*?-->|<\?(?:php)?[\s\S]*?\?>/gi;
+    return input.replace(commentsAndPhpTags, '').replace(tags, function ($0, $1) {        return allowed.indexOf('<' + $1.toLowerCase() + '>') > -1 ? $0 : '';
+    });
+};
+
+//mysql list load
+function getList(offset, callback) {
+    var limit = 5;
+    var client = conn();
+    var sql = 'SELECT a.id, a.categoryIDX, b.categoryName, a.title, a.body, a.viewCnt FROM horse_bbs AS a LEFT JOIN horse_category AS b ON a.categoryIDX = b.categoryIDX limit ?, ?';
+    client.query(sql, [offset * limit, limit], function(error, results, fields) {
+        client.end();
+        if(error) {
+            return false;
+        } else {
+            if(typeof callback === 'function') {
+                callback(results);
+            }
+        }
+    });
+};
+
+//리스트 데이타 변환
+function convertListData(data) {
+    var listData = new Array();
+    if(data.length > 0) {
+        for(var i in data) {
+            var tmp = {};
+
+            var t = data[i].body;
+            var strReg = new RegExp("http://*[^>]*\\.(jpg|gif|png)","gim");
+            var imgArr =  t.match(strReg);
+
+            if(imgArr != null && typeof imgArr[0] !== 'undefined') {
+                tmp['img'] = imgArr[0];
+            }
+            delete imgArr;
+
+            tmp['title'] = data[i].title;
+            tmp['body'] = strip_tags(data[i].body, '');
+            tmp['categoryIDX'] = data[i].categoryIDX;
+            tmp['categoryName'] = data[i].categoryName;
+
+            listData.push(tmp);
+            delete tmp;
+        }
+    }
+    return listData;
 };

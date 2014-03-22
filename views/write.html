@@ -1,3 +1,5 @@
+    <% include header.html %>
+    <% include menu.html %>
     <link href="../css/froala_editor.min.css" rel="stylesheet" type="text/css">
     <style>
     #wrap {
@@ -8,10 +10,13 @@
     }
     </style>
     <script>
+        var category = <%- category%>
         $(function() {
+            makeCategory();
             $('#btnWrite').click(function() {
                 var p = {};
                 p['title'] = $('#title').val();
+                p['categoryIDX'] = $('#categoryIDX').val();
                 p['body'] = $('#edit').editable("getHTML")[0];
                 console.log(p);
 
@@ -28,11 +33,33 @@
                 }, 'JSON');
             });
         });
+
+        var makeCategory = function() {
+            if(typeof category === 'object') {
+                var h = '';
+                h += '<select id="categoryIDX">';
+                for(var i in category) {
+                    h += '<option value="' + category[i].categoryIDX + '">' + category[i].categoryName + '</option>';
+                }
+                h += '</select>';
+                $('#categoryPannel').html(h);
+                delete h;
+            } else {
+                alert('카테고리를 생성 할 수 없습니다.');
+                return;
+            }
+        };
     </script>
 
     <div id="wrap" style="">
-        <label>제목</label>
-        <input type="text" size="50" id="title" />
+        <div>
+            <label>제목</label>
+            <input type="text" size="50" id="title" />
+        </div>
+        <div>
+            <label>카테고리</label>
+            <div id="categoryPannel"></div>
+        </div>
         <section id="editor">
             <div id='edit' style="margin-top: 30px;"></div>
         </section>
@@ -45,3 +72,4 @@
             $('#edit').editable({inlineMode: false, imageUploadURL: '/upload', height: 500});
         });
     </script>
+<% include footer.html %>
