@@ -44,21 +44,21 @@ if ('development' == app.get('env')) {
 // app.get('/', routes.index);
 // app.get('/users', user.list);
 
-app.get('/', function(request, response, next) {
-    fs.readFile('views/header.html', function(error, data) {
-        header = data.toString();
-    });
-    fs.readFile('views/menu.html', function(error, data) {
-        menu = data.toString();
-    });
-    fs.readFile('views/footer.html', function(error, data) {
-        footer = data.toString();
-    });
+// app.get('/', function(request, response, next) {
+//     fs.readFile('views/header.html', function(error, data) {
+//         header = data.toString();
+//     });
+//     fs.readFile('views/menu.html', function(error, data) {
+//         menu = data.toString();
+//     });
+//     fs.readFile('views/footer.html', function(error, data) {
+//         footer = data.toString();
+//     });
 
-    fs.readFile('views/mainBody.html', function(error, data) {
-        response.send(header + menu + data.toString() + footer);
-    });
-});
+//     fs.readFile('views/mainBody.html', function(error, data) {
+//         response.send(header + menu + data.toString() + footer);
+//     });
+// });
 
 //상세보기
 app.get('/viewContents', function(request, response, next) {
@@ -70,7 +70,7 @@ app.get('/viewContents', function(request, response, next) {
 
 
 //리스트뷰
-app.get('/list', function(request, response) {
+app.get('/', function(request, response) {
     getList(0, function(data) {
         listData = JSON.stringify(convertListData(data));
         response.render('list', {
@@ -140,6 +140,28 @@ app.post('/write', function(request, response, next) {
     });
 });
 
+//글보기
+app.get('/view/:id', function(request, response) {
+    var client = conn();
+    var sql = 'SELECT a.id, b.categoryName, a.title, a.body, a.viewCnt FROM horse_bbs AS a LEFT JOIN horse_category AS b ON a.categoryIDX = b.categoryIDX WHERE a.id = ?';
+    client.query(sql, request.param('id'), function(error, results, fields) {
+        client.end();
+        if(error) {
+            response.send('view mysql error. #1');
+            return;
+        } else {
+            console.log(results);
+            response.render('view', {
+                'id': results[0]['id']
+                , 'categoryName': results[0]['categoryName']
+                , 'title': results[0]['title']
+                , 'body': results[0]['body']
+                , 'viewCnt': results[0]['viewCnt']
+            });
+        }
+    });
+});
+
 http.createServer(app).listen(app.get('port'), function(){
     console.log('Express server listening on port ' + app.get('port'));
 });
@@ -197,6 +219,7 @@ function convertListData(data) {
             }
             delete imgArr;
 
+            tmp['id'] = data[i].id;
             tmp['title'] = data[i].title;
             tmp['body'] = strip_tags(data[i].body, '');
             tmp['categoryIDX'] = data[i].categoryIDX;

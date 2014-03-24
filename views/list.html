@@ -32,7 +32,7 @@
 		if(listData.length > 0) {
 			var h = '';
 			for(var i in listData) {
-			        h += '<li onclick="location.href=\'/viewContents\';">';
+			        h += '<li onclick="location.href=\'/view/' + listData[i].id + '\';">';
 			        	if(typeof listData[i].img !== 'undefined') {
 			        		h += '<img src="' + listData[i].img + '" width="100%">';
 			        	} else {

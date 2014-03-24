@@ -22,13 +22,14 @@ nav.horizontal ul li{	display: inline-block;}/* horizontal menu */
 img{max-width:100%;}
 /*end reset*/
 body{
-	font-family: 'Open Sans', sans-serif;
+	font-family: '맑은 고딕', 'Open Sans', sans-serif;
 	background:#F0EFEE;
 }
 /*---start-wrap----*/
 .wrap{
 	width:80%;
 	margin:0 auto;
+	max-width: 1000px;
 }
 /*---start-header----*/
 .header{
@@ -78,7 +79,7 @@ body{
 	-moz-border-radius: 0.3em;
 	-o-border-radius: 0.3em;
 	-webkit-appearance: none;
-	font-family: 'Open Sans', sans-serif;
+	font-family: '맑은 고딕', 'Open Sans', sans-serif;
 	color:#777;
 	position:relative;
 }
@@ -291,15 +292,17 @@ a.boxclose{
 }
 /*----start-single-page----*/
 .artical-content h3 a{
-	font: 400 28px/28px 'Open Sans', sans-serif;
+	font: 400 28px/28px '맑은 고딕', 'Open Sans', sans-serif;
 	color: #626262;
 	text-align: left;
 	font-weight: 400;
-	padding: 0.9em 0 0;
+	padding: 0;
 	display: block;
+	border-bottom: 3px solid #d0d0d0;
+	line-height: 2em;
 }
 .artical-content p{
-	font: normal 16px/26px 'Open Sans', sans-serif,Helvetica,sans-serif;
+	font: normal 16px/26px '맑은 고딕', 'Open Sans', sans-serif,Helvetica,sans-serif;
 	color: #9b9b9b;
 	padding: 17px 0px;
 	font-weight: 400;
@@ -317,7 +320,7 @@ a.boxclose{
 	padding-right:7px;
 }
 .share-artical ul li a{
-	font: 400 14px/22px  'Open Sans', sans-serif;
+	font: 400 14px/22px  '맑은 고딕', 'Open Sans', sans-serif;
 	color: #cbcbc3;
 	padding-left: 20px;
 	font-weight: 400;
@@ -327,7 +330,7 @@ a.boxclose{
 }
 /*---comment-box----*/
 .single-page {
-	margin-top: 8em;
+	margin-top: 0.5em;
 	background: #fff;
 	padding:2%;
 }
@@ -348,7 +351,7 @@ a.boxclose{
 	padding-right:10px;
 }
 .artical-links ul li a{
-	font: 400 14px/22px  'Open Sans', sans-serif;
+	font: 400 14px/22px  '맑은 고딕', 'Open Sans', sans-serif;
 	color: #cbcbc3;
 	padding-left: 20px;
 	font-weight: 400;
@@ -358,7 +361,7 @@ a.boxclose{
 }
 /*----start-comment-section---*/
 h4.style1 a {
-	font: 400 20px/28px 'Open Sans', sans-serif;
+	font: 400 20px/28px '맑은 고딕', 'Open Sans', sans-serif;
 	color: #363636;
 	text-transform: uppercase;
 	padding: 1em 0;
@@ -369,7 +372,7 @@ h4.style1 a {
 	transition: all 0.3s ease-out;
 }
 h3.style {
-	font: 400 13px/28px 'Open Sans', sans-serif;
+	font: 400 13px/28px '맑은 고딕', 'Open Sans', sans-serif;
 	color: #363636;
 	text-align: left;
 	text-transform: uppercase;
@@ -383,7 +386,7 @@ p.para {
 	font-weight: 400;
 }
 .grids_of_2 h2 {
-	font:400 30px/28px 'Open Sans', sans-serif;
+	font:400 30px/28px '맑은 고딕', 'Open Sans', sans-serif;
 	color: #363636;
 	text-align: left;
 	padding: 1em 0 0.5em;
@@ -410,7 +413,7 @@ p.para {
 	color:#363636;
 	line-height: 1.8em;
 	padding: 2px 0;
-	font-family: 'Open Sans', sans-serif;
+	font-family: '맑은 고딕', 'Open Sans', sans-serif;
 	transition:0.5s all;
 	-webkit-transition:0.5s all;
 	-moz-transition:0.5s all;
@@ -436,7 +439,7 @@ p.para {
 	margin: 0em auto;
 }
 .table-form form input[type="text"]{
-	font-family: 'Open Sans', sans-serif;
+	font-family: '맑은 고딕', 'Open Sans', sans-serif;
 	border: 1px solid rgba(192, 192, 192, 0.61);
 	outline: none;
 	padding: 12px;
@@ -460,7 +463,7 @@ p.para {
 	-o-box-shadow: 0px 0px 1px rgba(0, 0, 0, 0.05);
 }
 .table-form textarea{
-	font-family: 'Open Sans', sans-serif;
+	font-family: '맑은 고딕', 'Open Sans', sans-serif;
 	padding: 8px;
 	outline:none;
 	color: #333333;
@@ -487,7 +490,7 @@ p.para {
 	border: 1px solid #B9CB41;
 }
 .table-form input[type="submit"]{
-	font-family: 'Open Sans', sans-serif;
+	font-family: '맑은 고딕', 'Open Sans', sans-serif;
 	color: #5a5a5a;
 	padding: 0.8em 1.5em;
 	background: #fff;
@@ -515,7 +518,7 @@ p.para {
 .table-form label{
 	display: block;
 	margin: 0.4em 0 0.5em;
-	font-family: 'Open Sans', sans-serif;
+	font-family: '맑은 고딕', 'Open Sans', sans-serif;
 	color:#363636;
 	font-weight:100;
 }
@@ -533,7 +536,7 @@ p.para {
 	background: #fff;
 }
 .contact form{
-	font-family: 'Open Sans', sans-serif;
+	font-family: '맑은 고딕', 'Open Sans', sans-serif;
 }
 .map{
 	margin-bottom:30px;
@@ -550,7 +553,7 @@ p.para {
 	line-height: 1.8em;
 	font-size: 0.85em;
 	margin-bottom: 5px;
-	font-family: 'Open Sans', sans-serif;
+	font-family: '맑은 고딕', 'Open Sans', sans-serif;
 }
 span.mail a {
 	color:#B9CB41;
@@ -561,7 +564,7 @@ span.mail a:hover{
 .contact-to input[type="text"] {
 	padding: 12px 10px;
 	width: 30.66%;
-	font-family: 'Open Sans', sans-serif;
+	font-family: '맑은 고딕', 'Open Sans', sans-serif;
 	margin: 12px 0;
 	border: 1px solid rgba(192, 192, 192, 0.61);
 	color: #626262;
@@ -591,7 +594,7 @@ span.mail a:hover{
 	margin: 12px 0;
 	border: 1px solid rgba(192, 192, 192, 0.61);
 	color: #626262;
-	font-family: 'Open Sans', sans-serif;
+	font-family: '맑은 고딕', 'Open Sans', sans-serif;
 	outline: none;
 	margin-bottom: 25px;
 	height: 100px;
@@ -618,7 +621,7 @@ span.mail a:hover{
 	border: 1px solid #B9CB41;
 }
 .contact-form input[type="submit"] {
-	font-family: 'Open Sans', sans-serif;
+	font-family: '맑은 고딕', 'Open Sans', sans-serif;
 	color: #5a5a5a;
 	padding: 0.8em 1.5em;
 	background: #fff;
@@ -651,7 +654,7 @@ span.mail a:hover{
 	-webkit-transition: 0.5s all;
 	-moz-transition: 0.5s all;
 	-o-transition: 0.5s all;
-	font-family: 'Open Sans', sans-serif;
+	font-family: '맑은 고딕', 'Open Sans', sans-serif;
 	margin-bottom: 0.6em;
 }
 .span_1_of_first1 {
@@ -768,7 +771,7 @@ span.mail a:hover{
 		margin: 1.2% 2% 0 6%;
 	}
 	.artical-content h3 a {
-		font: 400 24px/36px 'Open Sans', sans-serif;
+		font: 400 24px/36px '맑은 고딕', 'Open Sans', sans-serif;
 		padding: 0.5em 0 0;
 	}
 	.artical-content p:nth-child(1){
@@ -778,7 +781,7 @@ span.mail a:hover{
 		width: 17%;
 	}
 	.artical-content p {
-		font: normal 14px/22px 'Open Sans', sans-serif,Helvetica,sans-serif;
+		font: normal 14px/22px '맑은 고딕', 'Open Sans', sans-serif,Helvetica,sans-serif;
 		padding: 8px 0px;
 	}
 	.artical-links {
@@ -794,14 +797,14 @@ span.mail a:hover{
 		padding-left:0;
 	}
 	.grids_of_2 h2 {
-		font: 400 26px/28px 'Open Sans', sans-serif;
+		font: 400 26px/28px '맑은 고딕', 'Open Sans', sans-serif;
 		padding: 0.8em 0 0.5em;
 	}
 	h4.style1 a {
-		font: 400 17px/14px 'Open Sans', sans-serif;
+		font: 400 17px/14px '맑은 고딕', 'Open Sans', sans-serif;
 	}
 	.grids_of_2 h2 {
-		font: 400 24px/14px 'Open Sans', sans-serif;
+		font: 400 24px/14px '맑은 고딕', 'Open Sans', sans-serif;
 		padding: 0.5em 0 0.2em;
 	}
 	.table-form form input[type="text"] {
@@ -859,7 +862,7 @@ span.mail a:hover{
 		margin: 1.2% 2% 0 6%;
 	}
 	.artical-content h3 a {
-		font: 400 24px/36px 'Open Sans', sans-serif;
+		font: 400 24px/36px '맑은 고딕', 'Open Sans', sans-serif;
 		padding: 0.5em 0 0;
 	}
 	.artical-content p:nth-child(1){
@@ -869,7 +872,7 @@ span.mail a:hover{
 		display:none;
 	}
 	.artical-content p {
-		font: normal 14px/22px 'Open Sans', sans-serif,Helvetica,sans-serif;
+		font: normal 14px/22px '맑은 고딕', 'Open Sans', sans-serif,Helvetica,sans-serif;
 		padding: 8px 0px;
 	}
 	.artical-links {
@@ -885,14 +888,14 @@ span.mail a:hover{
 		padding-left:0;
 	}
 	.grids_of_2 h2 {
-		font: 400 26px/28px 'Open Sans', sans-serif;
+		font: 400 26px/28px '맑은 고딕', 'Open Sans', sans-serif;
 		padding: 0.8em 0 0.5em;
 	}
 	h4.style1 a {
-		font: 400 17px/14px 'Open Sans', sans-serif;
+		font: 400 17px/14px '맑은 고딕', 'Open Sans', sans-serif;
 	}
 	.grids_of_2 h2 {
-		font: 400 24px/14px 'Open Sans', sans-serif;
+		font: 400 24px/14px '맑은 고딕', 'Open Sans', sans-serif;
 		padding: 0.5em 0 0.2em;
 	}
 	.table-form form input[type="text"] {
@@ -977,7 +980,7 @@ span.mail a:hover{
 		float: right;
 	}
 	.artical-content h3 a {
-		font: 400 20px/31px 'Open Sans', sans-serif;
+		font: 400 20px/31px '맑은 고딕', 'Open Sans', sans-serif;
 		padding: 0.5em 0 0;
 	}
 	.artical-links ul li {
@@ -993,7 +996,7 @@ span.mail a:hover{
 		display:none;
 	}
 	.artical-content p {
-		font: normal 14px/22px 'Open Sans', sans-serif,Helvetica,sans-serif;
+		font: normal 14px/22px '맑은 고딕', 'Open Sans', sans-serif,Helvetica,sans-serif;
 		padding: 8px 0px;
 	}
 	.artical-links {
@@ -1009,14 +1012,14 @@ span.mail a:hover{
 		padding-left:0;
 	}
 	.grids_of_2 h2 {
-		font: 400 26px/28px 'Open Sans', sans-serif;
+		font: 400 26px/28px '맑은 고딕', 'Open Sans', sans-serif;
 		padding: 0.8em 0 0.5em;
 	}
 	h4.style1 a {
-		font: 400 17px/14px 'Open Sans', sans-serif;
+		font: 400 17px/14px '맑은 고딕', 'Open Sans', sans-serif;
 	}
 	.grids_of_2 h2 {
-		font: 400 24px/14px 'Open Sans', sans-serif;
+		font: 400 24px/14px '맑은 고딕', 'Open Sans', sans-serif;
 		padding: 0.5em 0 0.2em;
 	}
 	.table-form form input[type="text"] {
@@ -1110,7 +1113,7 @@ span.mail a:hover{
 		float: right;
 	}
 	.artical-content h3 a {
-		font: 400 16px/23px 'Open Sans', sans-serif;
+		font: 400 16px/23px '맑은 고딕', 'Open Sans', sans-serif;
 		padding: 0.5em 0 0;
 	}
 	.artical-links ul li {
@@ -1126,7 +1129,7 @@ span.mail a:hover{
 		display:none;
 	}
 	.artical-content p {
-		font: normal 14px/22px 'Open Sans', sans-serif,Helvetica,sans-serif;
+		font: normal 14px/22px '맑은 고딕', 'Open Sans', sans-serif,Helvetica,sans-serif;
 		padding: 8px 0px;
 	}
 	.artical-links {
@@ -1142,14 +1145,14 @@ span.mail a:hover{
 		padding-left:0;
 	}
 	.grids_of_2 h2 {
-		font: 400 26px/28px 'Open Sans', sans-serif;
+		font: 400 26px/28px '맑은 고딕', 'Open Sans', sans-serif;
 		padding: 0.8em 0 0.5em;
 	}
 	h4.style1 a {
-		font: 400 17px/14px 'Open Sans', sans-serif;
+		font: 400 17px/14px '맑은 고딕', 'Open Sans', sans-serif;
 	}
 	.grids_of_2 h2 {
-		font: 400 24px/14px 'Open Sans', sans-serif;
+		font: 400 24px/14px '맑은 고딕', 'Open Sans', sans-serif;
 		padding: 0.5em 0 0.2em;
 	}
 	.table-form form input[type="text"] {
