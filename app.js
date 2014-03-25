@@ -169,10 +169,15 @@ http.createServer(app).listen(app.get('port'), function(){
 /* function */
 //mysql 통신
 var conn = function() {
+    // var client = mysql.createConnection({
+    //     user: 'nhbaby',
+    //     password: 'nhbaby1',
+    //     database: 'horse'
+    // });
     var client = mysql.createConnection({
         user: 'nhbaby',
-        password: 'nhbaby1',
-        database: 'horse'
+        password: '',
+        database: 'c9'
     });
     return client;
 };
