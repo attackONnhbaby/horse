@@ -1043,7 +1043,7 @@ span.mail a:hover{
 		display:block;
 	}
 	.box {
-		top: -12px;
+		top: -700px;
 	}
 	.map{
 		display:none;
@@ -1056,7 +1056,7 @@ span.mail a:hover{
 		width:100%;
 	}
 	.single-page,.contact-info{
-		margin-top: 9.5em;
+		margin-top: 0.5em;
 		padding: 4% 4% 5% 4%;
 	}
 	.span_1_of_first1 h5 {

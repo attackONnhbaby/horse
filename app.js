@@ -114,7 +114,7 @@ app.post('/upload', function(request, response, next) {
             if(error) {
                 throw error;
             } else {
-                var url = {link: 'http://127.0.0.1:3000/upload/' + request.files.file.name};
+                var url = {link: '/upload/' + request.files.file.name};
                 response.send(JSON.stringify(url));
             }
         });
@@ -188,9 +188,9 @@ function strip_tags (input, allowed) {
 
 //mysql list load
 function getList(offset, callback) {
-    var limit = 5;
+    var limit = 10;
     var client = conn();
-    var sql = 'SELECT a.id, a.categoryIDX, b.categoryName, a.title, a.body, a.viewCnt FROM horse_bbs AS a LEFT JOIN horse_category AS b ON a.categoryIDX = b.categoryIDX limit ?, ?';
+    var sql = 'SELECT a.id, a.categoryIDX, b.categoryName, a.title, a.body, a.viewCnt FROM horse_bbs AS a LEFT JOIN horse_category AS b ON a.categoryIDX = b.categoryIDX order by id desc limit ?, ?';
     client.query(sql, [offset * limit, limit], function(error, results, fields) {
         client.end();
         if(error) {
@@ -211,9 +211,9 @@ function convertListData(data) {
             var tmp = {};
 
             var t = data[i].body;
-            var strReg = new RegExp("http://*[^>]*\\.(jpg|gif|png)","gim");
+            // var strReg = new RegExp("http://*[^>]*\\.(jpg|gif|png)","gim");
+            var strReg = new RegExp("[^= \"']*\.(gif|jpg|bmp)");
             var imgArr =  t.match(strReg);
-
             if(imgArr != null && typeof imgArr[0] !== 'undefined') {
                 tmp['img'] = imgArr[0];
             }
@@ -222,6 +222,9 @@ function convertListData(data) {
             tmp['id'] = data[i].id;
             tmp['title'] = data[i].title;
             tmp['body'] = strip_tags(data[i].body, '');
+            if(tmp['body'].length > 50) {
+                tmp['body'] = tmp['body'].substr(0, 100) + '...';
+            }
             tmp['categoryIDX'] = data[i].categoryIDX;
             tmp['categoryName'] = data[i].categoryName;
 
