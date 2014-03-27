@@ -62,8 +62,6 @@ app.get('/viewContents', function(request, response, next) {
     });
 });
 
-
-
 //리스트뷰
 app.get('/', function(request, response) {
     getList(0, function(data) {
@@ -157,11 +155,25 @@ app.get('/view/:id', function(request, response) {
     });
 });
 
+app.get('/fb', function(request, response) {
+    response.render('fb', {});
+});
+
 http.createServer(app).listen(app.get('port'), function(){
     console.log('Express server listening on port ' + app.get('port'));
 });
 
-/* function */
+/**
+ * 
+ * FUNCTION
+ * FUNCTION
+ * FUNCTION
+ * FUNCTION
+ * FUNCTION
+ * FUNCTION
+ * 
+ */
+
 //mysql 통신
 var conn = function() {
 //    var client = mysql.createConnection({
