@@ -1,8 +1,3 @@
-
-/**
- * Module dependencies.111333!!!!!
- */
-
 var express = require('express');
 var routes = require('./routes');
 var user = require('./routes/user');
@@ -174,7 +169,7 @@ var conn = function() {
         password: 'nhbaby1',
         database: 'horse'
     });
-    var/* client = mysql.createConnection({
+    /*var client = mysql.createConnection({
         user: 'nhbaby',
         password: '',
         database: 'c9'
