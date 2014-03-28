@@ -1,4 +1,5 @@
 var express = require('express'), hash = require('./pass').hash;
+var util = require('util');
 var app = express();
 
 // config
@@ -62,6 +63,9 @@ function restrict(req, res, next) {
 };
 
 app.get('/', function(req, res){
+    console.log('****************************************');
+    console.log(req.session);
+    console.log( util.inspect(req.session));
     res.redirect('login');
 });
 

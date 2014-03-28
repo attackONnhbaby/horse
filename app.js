@@ -5,6 +5,7 @@ var http = require('http');
 var path = require('path');
 var fs = require('fs');
 var mysql = require('mysql');
+var util = require('util');
 //var ejs = require('ejs');
 
 var app = express();
@@ -155,9 +156,9 @@ app.get('/view/:id', function(request, response) {
     });
 });
 
-app.get('/fb', function(request, response) {
-    response.render('fb', {});
-});
+//app.get('/fb', function(request, response) {
+//    response.render('fb', {});
+//});
 
 http.createServer(app).listen(app.get('port'), function(){
     console.log('Express server listening on port ' + app.get('port'));
@@ -176,16 +177,19 @@ http.createServer(app).listen(app.get('port'), function(){
 
 //mysql 통신
 var conn = function() {
-//    var client = mysql.createConnection({
-//        user: 'nhbaby',
-//        password: 'nhbaby1',
-//        database: 'horse'
-//    });
     var client = mysql.createConnection({
         user: 'nhbaby',
-        password: '',
-        database: 'c9'
+        password: 'nhbaby1',
+        database: 'horse'
     });
+//    var client = mysql.createConnection({
+//        user: 'nhbaby',
+//        password: '',
+//        database: 'c9'
+//    });
+    console.log('@@@@@@@@@@@@@@@@@@@@@@@');
+    console.log(client);
+    console.log(util.inspect(client));
     return client;
 };
 
@@ -206,6 +210,7 @@ function getList(offset, callback) {
     client.query(sql, [offset * limit, limit], function(error, results, fields) {
         client.end();
         if(error) {
+            console.log('mysql error #2');
             return false;
         } else {
             if(typeof callback === 'function') {
