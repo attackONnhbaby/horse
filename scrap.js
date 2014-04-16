@@ -1,11 +1,11 @@
 var util = require('util');
 var express = require('express');
-//var jsdom = require('jsdom');
 var cheerio = require('cheerio');
 var request = require('request');
 var routes = require('./routes');
 var http = require('http');
 var url = require('url');
+var scrap = require('./routes/scrap');
 var app = express();
 
 app.configure(function() {
@@ -29,7 +29,10 @@ app.configure('production', function() {
     app.use(express.errorHandler());
 });
 
-app.get('/', routes.index);
+app.get('/', scrap.index);
+//app.get('/', function(req, res) {
+//    res.end();
+//});
 
 app.get('/watch/:id', function(req, res) {
     res.render('video', {title: 'watch', vid: req.params.id});
@@ -77,5 +80,8 @@ app.get('/node', function(req, res) {
 });
 
 http.createServer(app).listen(app.get('port'), function(){
+
+    console.log(scrap);
+    console.log(routes);
     console.log('Express server listening on port ' + app.get('port'));
 });

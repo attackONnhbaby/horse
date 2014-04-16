@@ -1,6 +1,7 @@
 var express = require('express');
 var routes = require('./routes');
 var user = require('./routes/user');
+var blog = require('./routes/blog');
 var http = require('http');
 var path = require('path');
 var fs = require('fs');
@@ -57,23 +58,25 @@ if ('development' == app.get('env')) {
 // });
 
 //상세보기
-app.get('/viewContents', function(request, response, next) {
-    fs.readFile('views/singlePage.html', function(error, data) {
-        response.send(header + menu + data.toString() + footer);
-    });
-});
+//app.get('/viewContents', function(request, response, next) {
+//    fs.readFile('views/singlePage.html', function(error, data) {
+//        response.send(header + menu + data.toString() + footer);
+//    });
+//});
+app.get('/viewContents', blog.viewContents);
 
 //리스트뷰
-app.get('/', function(request, response) {
-    getList(0, function(data) {
-        listData = JSON.stringify(convertListData(data));
-        response.render('list', {
-            pageNum: 0,
-            listData: listData
-        });
-        delete data;
-    });
-});
+//app.get('/', function(request, response) {
+//    getList(0, function(data) {
+//        listData = JSON.stringify(convertListData(data));
+//        response.render('list', {
+//            pageNum: 0,
+//            listData: listData
+//        });
+//        delete data;
+//    });
+//});
+app.get('/', blog.index);
 
 //리스트 목록 추가 로드
 app.post('/list', function(request, response) {
