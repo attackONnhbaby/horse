@@ -4,6 +4,9 @@
  */
 
 exports.index = function(req, res){
+    console.log('============================');
+    console.log(config.horse);
+    console.log('============================');
     getList(0, function(data) {
         listData = JSON.stringify(convertListData(data));
         response.render('list', {

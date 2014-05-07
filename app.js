@@ -7,6 +7,7 @@ var path = require('path');
 var fs = require('fs');
 var mysql = require('mysql');
 var util = require('util');
+var config = require('./include/config.json');
 //var ejs = require('ejs');
 
 var app = express();
@@ -66,17 +67,17 @@ if ('development' == app.get('env')) {
 app.get('/viewContents', blog.viewContents);
 
 //리스트뷰
-//app.get('/', function(request, response) {
-//    getList(0, function(data) {
-//        listData = JSON.stringify(convertListData(data));
-//        response.render('list', {
-//            pageNum: 0,
-//            listData: listData
-//        });
-//        delete data;
-//    });
-//});
-app.get('/', blog.index);
+app.get('/', function(request, response) {
+    getList(0, function(data) {
+        listData = JSON.stringify(convertListData(data));
+        response.render('list', {
+            pageNum: 0,
+            listData: listData
+        });
+        delete data;
+    });
+});
+//app.get('/', blog.index);
 
 //리스트 목록 추가 로드
 app.post('/list', function(request, response) {
@@ -181,18 +182,18 @@ http.createServer(app).listen(app.get('port'), function(){
 //mysql 통신
 var conn = function() {
     var client = mysql.createConnection({
-        user: 'nhbaby',
-        password: 'nhbaby1',
-        database: 'horse'
+        user: config.SQLUser,
+        password: config.SQLPass,
+        database: config.SQLDB
     });
 //    var client = mysql.createConnection({
 //        user: 'nhbaby',
 //        password: '',
 //        database: 'c9'
 //    });
-    console.log('@@@@@@@@@@@@@@@@@@@@@@@');
-    console.log(client);
-    console.log(util.inspect(client));
+//    console.log('@@@@@@@@@@@@@@@@@@@@@@@');
+//    console.log(client);
+//    console.log(util.inspect(client));
     return client;
 };
 
