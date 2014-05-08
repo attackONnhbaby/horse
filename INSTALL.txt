@@ -1,4 +1,4 @@
-#reatedatabase horse;
+﻿#reatedatabase horse;
 
 
 CREATE TABLE `horse_bbs` (
@@ -25,3 +25,17 @@ CREATE TABLE `horse_category` (
 
 #run
 forever -c node app.js
+
+
+
+#github - ssh key - window7
+http://www.drewblas.com/2008/06/27/setting-up-git-and-github-on-windows/
+
+1. PuttyGen으로 Generate 후 Save Public Key, Save Private Key
+
+2. ssh public key copy all -> github account -> ssh keys -> paste
+
+3. Environment Variables -> (KEY)GIT_SSH and the value to (VALUE)C:\Program Files (x86)\PuTTY\plink.exe
+
+4. PUTTY open "github.com" and YES(unknowhost regist)
+
