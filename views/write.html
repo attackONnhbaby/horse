@@ -69,7 +69,7 @@
 
     <script>
         $(function(){
-            $('#edit').editable({inlineMode: false, imageUploadURL: '/upload', height: 500});
+            $('#edit').editable({inlineMode: false, imageUploadURL: '/upload', height: 500, buttons: ["bold", "italic", "underline", "strikeThrough", "fontFamily", "fontSize", "color", "formatBlock", "align", "insertOrderedList", "insertUnorderedList", "outdent", "indent", "selectAll", "createLink", "insertImage", "insertVideo", "undo", "redo", "inserthorizontalrule", "html"]});
         });
     </script>
 <% include footer.html %>
