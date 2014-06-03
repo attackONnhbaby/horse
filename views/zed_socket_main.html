@@ -1,0 +1,47 @@
+<html>
+	<head>
+		<script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+		<script src="http://localhost:3000/socket.io/socket.io.js"></script>
+		<script>
+			var makeBox = function(amount) {
+				var h = '';
+
+				var max;
+				if(typeof amount === 'undefined') {
+					max = 10;
+				} else {
+					max = amount
+				}
+				for(var i = 0; i < max; i++) {
+					h += '<li data-pos=' + i + ' class="box' + i + '">' + i + '</li>'
+				}
+				$('.box').append(h);
+			};
+
+			$(function() {
+				makeBox();
+
+				var socket = io.connect('http://localhost:3000');
+				socket.on('boxStateChange', function(param) {
+					console.log('response');
+					console.log(param);
+					$('.box' + param['pos']).fadeOut().fadeIn();
+				});
+
+				$('.box > li').click(function() {
+					console.log( $(this).data('pos') );
+					var p = {};
+					p['pos'] = $(this).data('pos');
+					socket.emit('selectBox', p);
+				});
+			});
+		</script>
+		<style>
+			.box {list-style: none; padding: 0; margin: 0;}
+			.box li {display: inline-block; padding: 0; margin: 5px; background-color: #ededed; width: 100px; height: 100px;}
+		</style>
+	</head>
+	<body>
+		<ul class="box"><ul>
+	</body>
+</html>

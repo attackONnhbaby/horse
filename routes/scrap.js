@@ -6,4 +6,6 @@
 
 exports.index = function(req, res){
   res.send("respond with a resource!!!!!!!@@@@!!!!!!!!!");
+  // console.log(req);
+  console.log(res);
 };
